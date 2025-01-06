@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Cidades Atendidas Danúbio Azul Cargas",
+  "description": "Cidades Atendidas Danúbio Azul Cargas.",
+  "version": "1.0.0",
+  "icons": {
+    "16": "logo512.png",
+    "48": "logo512.png",
+    "128": "logo512.png"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "logo512.png"
+  },
+  "permissions": [],
+  "host_permissions": []
+}

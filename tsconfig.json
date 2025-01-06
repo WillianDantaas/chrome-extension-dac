@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES6", // Versão do JavaScript para compilar
+    "lib": ["DOM", "DOM.Iterable", "ESNext"], // Bibliotecas disponíveis
+    "allowJs": true, // Permitir arquivos .js
+    "skipLibCheck": true, // Ignorar verificação de tipos em node_modules
+    "esModuleInterop": true, // Melhor compatibilidade com módulos ES
+    "allowSyntheticDefaultImports": true, // Permitir importações padrão
+    "strict": true, // Habilitar todas as verificações de tipo estritas
+    "forceConsistentCasingInFileNames": true, // Consistência no uso de maiúsculas/minúsculas
+    "module": "ESNext", // Sistema de módulo
+    "moduleResolution": "Node", // Como resolver módulos
+    "resolveJsonModule": true, // Permitir importação de arquivos JSON
+    "isolatedModules": true, // Permitir arquivos TypeScript sem módulos
+    "noEmit": true, // Não emitir arquivos de saída
+    "jsx": "react-jsx" // Transformar JSX para React
+  },
+  "include": ["src"], // Incluir arquivos da pasta src
+  "exclude": ["node_modules"] // Excluir arquivos da pasta node_modules
+}
