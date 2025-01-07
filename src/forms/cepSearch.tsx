@@ -13,10 +13,12 @@ export function SearchCityForm() {
     const { cepData, fetchCepData } = useCepContext();
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
+    const [deliveryTime, setDeliveryTime] = useState<string | null>("")
 
     const handleSearch = async () => {
         setLoading(true);
         setMessage(""); // Resetar mensagem ao iniciar uma nova busca
+        setDeliveryTime(null); // Resetar prazo de entrega
 
         if (cep) {
             try {
@@ -39,9 +41,10 @@ export function SearchCityForm() {
         const cepPrefix = cep.slice(0, 3); // Obtendo os 3 primeiros dígitos do CEP
 
         // Verificar se a cidade está na base de dados
-        const cityInDatabase = servicedCities.some(
+        const cityInDatabase = servicedCities.find(
             (city) => city.city.toLowerCase() === cityFromApi.toLowerCase()
-        );
+        )
+
 
         if (!cityInDatabase) {
             setMessage("Infelizmente, não atendemos sua cidade.");
@@ -68,6 +71,12 @@ export function SearchCityForm() {
         ) {
             setMessage("Infelizmente, a rua informada está restrita.");
             return;
+        }
+
+        // Se a cidade for atendida, atualizar o prazo de entrega
+        if (cityInDatabase.deliveryTimeHours) {
+            setDeliveryTime(cityInDatabase.deliveryTimeHours);
+            setMessage("Estamos atendendo sua cidade!");
         }
 
         // Se todas as validações passarem
@@ -138,6 +147,10 @@ export function SearchCityForm() {
                             </>
                         )}
                         <p className="font-bold text-center text-xl">{message}</p>
+                        { deliveryTime &&
+                            <p className="font-bold text-center text-lg">Prazo de Entrega: {deliveryTime} horas úteis</p>
+
+                        }
                     </div>
                 )}
 
