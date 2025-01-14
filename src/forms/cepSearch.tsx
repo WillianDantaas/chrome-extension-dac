@@ -14,11 +14,13 @@ export function SearchCityForm() {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
     const [deliveryTime, setDeliveryTime] = useState<string | null>("")
+    const [mode, setMode] = useState<string | null>("")
 
     const handleSearch = async () => {
         setLoading(true);
         setMessage(""); // Resetar mensagem ao iniciar uma nova busca
         setDeliveryTime(null); // Resetar prazo de entrega
+        setMode(null)
 
         if (cep) {
             try {
@@ -79,6 +81,24 @@ export function SearchCityForm() {
             setMessage("Estamos atendendo sua cidade!");
         }
 
+        if (cityInDatabase.mode) {
+
+
+            if (cityInDatabase.mode === "R/O") {
+                setMode('R/O = Retira na agência da Danúbio Azul')
+            }
+
+            if (cityInDatabase.mode === "E/C") {
+                setMode('E/C = Entrega feita via Caminhão')
+            }
+
+            if (cityInDatabase.mode === "E/O") {
+                setMode('E/O = Entrega feita via ônibus')
+            }
+            setMessage("Estamos atendendo sua cidade!");
+        }
+
+
         // Se todas as validações passarem
         setMessage("Estamos atendendo sua cidade!");
     }, [cepData, cep]);
@@ -138,19 +158,23 @@ export function SearchCityForm() {
                 </form>
 
                 {message && (
-                    <div className="mt-4 p-4 rounded-lg max-w-md mx-auto text-gray-900 dark:text-white">
+                    <div className="mt-4 p-4 rounded-lg max-w-md mx-auto flex flex-col items-start text-gray-900 dark:text-white">
                         <h3 className="text-lg font-semibold">Resultados:</h3>
                         {cepData && (
                             <>
-                                <p>Cidade: {cepData.city}</p>
-                                <p>Bairro: {cepData.neighborhood}</p>
+                                <p className="text-lg">Cidade: {cepData.city}</p>
+                                <p className="text-lg">Bairro: {cepData.neighborhood}</p>
+                                <p className="text-lg">Estado: {cepData.state}</p>
                             </>
                         )}
-                        <p className="font-bold text-center text-xl">{message}</p>
-                        { deliveryTime &&
-                            <p className="font-bold text-center text-lg">Prazo de Entrega: {deliveryTime} horas úteis</p>
-
+                        <p className="mt-4 font-bold text-lg">{message}</p>
+                        {deliveryTime &&
+                            <p className="font-bold text-lg">Prazo de Entrega: {deliveryTime} horas úteis</p>
                         }
+                        {mode && 
+                        <p className="font-bold text-xl mx-auto">{mode}</p>
+                        }
+
                     </div>
                 )}
 

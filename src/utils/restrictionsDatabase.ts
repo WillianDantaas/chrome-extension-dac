@@ -1,4 +1,10 @@
-export const restrictions = {
+interface RestrictionsProps {
+    restrictedCeps: string[];
+    restrictedNeighborhoods: string[];
+    restrictedStreets: string[];
+}
+
+export const restrictions: RestrictionsProps = {
     // CEPs restritos pelos 3 primeiros dígitos
     restrictedCeps: ["083", "081", "082", "048", "049", "028", "029", "056", "026", "084"],
 
@@ -20,6 +26,7 @@ export const restrictions = {
     restrictedStreets: [
         "Rua Barão de Duprat",
         "Rua Carlos de Souza Nazareth",
+        "Rua vinte e cinco de Março",
         "Rua 25 de Março",
         "Rua Florêncio de Abreu",
         "Rua São Bento",
